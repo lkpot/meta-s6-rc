@@ -161,8 +161,23 @@ umask %s s6-setuidgid %s s6-log -d3 %s %s" %
         bb.utils.mkdirhier(tree)
         valid_files = valid_files_service + [ "check-instance" ]
         files = getVarFlagsExpand("S6RC_TEMPLATES_%s" % template)
+        log = getVarFlagsExpand('S6RC_TEMPLATES_%s_log' % template)
+        do_logger = not "no-log" in files
 
         write_verbatim(workdir, tree, template, files, valid_files, [ "run" ])
+        # Automatic log-service generation
+        if do_logger:
+            tree = templatetree + "/" + template + "/log"
+            bb.utils.mkdirhier(tree)
+
+            files = { "run": "#!/bin/execlineb -P\n\
+envfile ../env/instance\n\
+importas instance INSTANCE\n\
+umask %s s6-setuidgid %s s6-log %s %s" %
+                        (log.get("umask", "0037"), log.get("user", "logger"),
+                         log.get("script", "T s100000 n10"),
+                         log.get("dir", "/var/log/${instance}@" + template)) }
+            write_verbatim(workdir, tree, template + "-log", files, valid_files, [ "run" ])
 }
 addtask do_s6rc_create_tree after do_compile before do_install
 do_s6rc_create_tree[vardeps] += "S6RC_BUNDLE_basic"

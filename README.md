@@ -147,10 +147,20 @@ The `syslogd/run` file is expected to be found in "${S}/syslogd.run"
 
 ### Templates
 
-`S6_RC_TEMPLATES` contains a space separated list of templates that
+`S6RC_TEMPLATES` contains a space separated list of templates that
 can be instantiated by the [*rc-dynamic*](#rc-dynamic) command.
-`S6RC_LONGRUN_%[ ]` declares service properties with % replaced by a template-name.
+`S6RC_TEMPLATES_%[ ]` declares service properties with % replaced by a template-name.
 A *run* script is mandatory
+
+A log service will always be setup, unless `S6RC_TEMPLATES_%[no-log]`
+exists. `S6RC_TEMPLATES_%_log[]` properties are evaluated
+with the following property files:
+ - run: `umask {umask} s6-setuidgid {user} s6-log -d3 {script} {dir}`
+   with {...} replaced by overrideable defaults:
+   - umask: 0037
+   - user: logger
+   - script: `T s100000 n10`
+   - dir: `/var/log/<template-instance>@<template-name>`
 
 ## Additional commands
 
