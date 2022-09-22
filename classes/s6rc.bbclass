@@ -105,7 +105,7 @@ python do_s6rc_create_tree() {
     valid_files_atomic = [ "timeout-up", "timeout-down", "flag-essential",
                            "dependencies", "bundles", "influences" ]
     valid_files_service = [ "run", "finish", "down", "notification-fd",
-                            "timeout-kill", "timeout-finish",
+                            "timeout-kill", "timeout-finish", "no-log",
                             "max-death-tally", "down-signal" ]
     # Bundles
     for bundle in (d.getVar('S6RC_BUNDLES', True) or "").split():
