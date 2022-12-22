@@ -1,6 +1,11 @@
 FILES:${PN} += "/libexec"
 BBCLASSEXTEND = "native"
 
+# Skip "buildpaths" QA check for all s6-skarnet dev packages
+# Generated config.h contains tmpdir reference as comment
+# that triggers the QA issue
+INSANE_SKIP:${PN}-dev += "buildpaths"
+
 do_configure() {
   ${S}/configure --enable-static --libdir=${prefix}/lib \
                  ${@'--enable-static-libc' if "${TCLIBC}" == "musl" else ''}\
