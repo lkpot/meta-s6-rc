@@ -6,12 +6,12 @@ SECTION = "base"
 DEPENDS = "skalibs s6 execline"
 RDEPENDS:${PN} = "s6 execline"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=0280da83329b0ff1dfa49e1444f1cd97"
+LIC_FILES_CHKSUM = "file://COPYING;md5=3710923a1cbdcc20ee753ff94bc119ca"
 
 SRC_URI = "https://skarnet.org/software/${BPN}/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "11ae08d0a66210b5e56b6baee0f6b9b1b69fbedb05fda1285b115a31ca46c77f"
+SRC_URI[sha256sum] = "d11b596b719ac134f77eb19450907d1fe6d84b4adc36d44ef748dbe55487b3ed"
 
-PV = "1.1.2.0"
+PV = "1.1.3.0"
 
 inherit s6-skarnet
 

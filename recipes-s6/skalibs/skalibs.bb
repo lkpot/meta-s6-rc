@@ -4,12 +4,12 @@ HOMEPAGE = "https://skarnet.org/software/${BPN}/"
 LICENSE = "ISC"
 SECTION = "base"
 DEPENDS = ""
-LIC_FILES_CHKSUM = "file://COPYING;md5=c92b5c6593e97d6cc9bcb4892128e2b8"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5c17f5dc8226509a4f72d6be7ae756b4"
 
 SRC_URI = "https://skarnet.org/software/${BPN}/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "ddfec5730e5b2f19d0381ecf7f796b39a6e473236bda0ad8d3776a3fe7b07e43"
+SRC_URI[sha256sum] = "0e626261848cc920738f92fd50a24c14b21e30306dfed97b8435369f4bae00a5"
 
-PV = "2.14.2.0"
+PV = "2.14.4.0"
 
 inherit s6-skarnet
 
@@ -19,5 +19,7 @@ do_configure() {
 }
 
 do_configure:class-native() {
-    ${S}/configure --prefix=${root_prefix} --includedir=${includedir}
+    ${S}/configure --prefix=${root_prefix} --includedir=${includedir} --libdir=${libdir}
 }
+
+INSANE_SKIP:${PN} = "useless-rpaths"

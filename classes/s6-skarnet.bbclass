@@ -10,7 +10,8 @@ do_configure() {
                  ${@'--enable-static-libc' if "${TCLIBC}" == "musl" else ''}\
                  --includedir=${includedir} --prefix=${root_prefix} \
                  --with-include=${STAGING_INCDIR} \
-                 --with-lib=${STAGING_BASELIBDIR} \
+                 --with-lib=${STAGING_LIBDIR} \
+                 --with-dynlibdir=${STAGING_BASE_LIBDIR} \
                  --with-sysdeps=${STAGING_LIBDIR}/skalibs/sysdeps \
                  --shebangdir=${base_bindir} --libexecdir=${libexecdir} ${EXTRA_S6CONF}
 }
@@ -18,6 +19,8 @@ do_configure() {
 do_configure:class-native() {
   ${S}/configure --enable-static --enable-shared --libdir=${prefix}/lib \
                  --includedir=${includedir} --prefix=${root_prefix} \
+                 --with-lib=${STAGING_LIBDIR_NATIVE} \
+                 --with-dynlibdir=${STAGING_BASE_LIBDIR_NATIVE} \
                  --shebangdir=${base_bindir_native} --libexecdir=${libexecdir_native} ${EXTRA_S6CONF}
 }
 

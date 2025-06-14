@@ -4,11 +4,11 @@ HOMEPAGE = "https://skarnet.org/software/${BPN}/"
 LICENSE = "ISC"
 SECTION = "base"
 DEPENDS = "skalibs"
-LIC_FILES_CHKSUM = "file://COPYING;md5=c92b5c6593e97d6cc9bcb4892128e2b8"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5c17f5dc8226509a4f72d6be7ae756b4"
 
 SRC_URI = "https://skarnet.org/software/${BPN}/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "6aee32bb68d01f5109f71e31a283213c668cd3c0e79fb9e469e6cabb58079f2b"
+SRC_URI[sha256sum] = "b6308519f109a67469c4aaafa9df1f009ad0961fa798ffc38f895587e6935729"
 
-PV = "2.3.7.2"
+PV = "2.4.1.0"
 
 inherit s6-skarnet
