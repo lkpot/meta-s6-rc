@@ -101,7 +101,7 @@ python do_s6rc_create_tree() {
             if sfile in [ "filedescriptors" ]:
                 array_to_dir(tree + "/dependencies.d", [ "fdstorage" ])
 
-    workdir = d.getVar("WORKDIR")
+    workdir = d.getVar("UNPACKDIR")
     workdir_s6 = workdir + "/" + d.getVar("S6RC_DIR")
     if os.path.exists(workdir_s6):
         shutil.rmtree(workdir_s6)
@@ -247,7 +247,7 @@ python () {
 fakeroot do_s6rc_install_tree() {
   if test "${INIT_MANAGER}" = "s6"; then
     install -d ${D}${sysconfdir}
-    cp -r ${WORKDIR}/${S6RC_DIR} ${D}${sysconfdir}
+    cp -r ${UNPACKDIR}/${S6RC_DIR} ${D}${sysconfdir}
     for link in ${S6RC_INITD_SYMLINKS}; do
       mkdir -p ${D}/etc/init.d
       rm -f ${D}/etc/init.d/${link}
