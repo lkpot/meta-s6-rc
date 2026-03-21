@@ -101,8 +101,8 @@ python do_s6rc_create_tree() {
             if sfile in [ "filedescriptors" ]:
                 array_to_dir(tree + "/dependencies.d", [ "fdstorage" ])
 
-    workdir = d.getVar("WORKDIR")
-    workdir_s6 = workdir + "/" + d.getVar("S6RC_DIR")
+    workdir = d.getVar("UNPACKDIR")
+    workdir_s6 = d.getVar("WORKDIR") + "/" + d.getVar("S6RC_DIR")
     if os.path.exists(workdir_s6):
         shutil.rmtree(workdir_s6)
     basetree = workdir_s6 + "/tree"

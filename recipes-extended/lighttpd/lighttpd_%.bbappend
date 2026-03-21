@@ -16,10 +16,10 @@ FILES:${PN} += "${bindir}/https_keygen.sh"
 do_install:append() {
   install -d ${D}${sysconfdir}/lighttpd.d ${D}${sysconfdir}/lighttpd \
              ${D}${bindir}
-  install -m 0644 ${WORKDIR}/ssl.conf ${WORKDIR}/socket_activation.conf \
+  install -m 0644 ${UNPACKDIR}/ssl.conf ${UNPACKDIR}/socket_activation.conf \
 		${D}${sysconfdir}/lighttpd.d/
-  install -m 0644 ${WORKDIR}/openssl-cert.conf ${D}${sysconfdir}/lighttpd
-  install -m 0755 ${WORKDIR}/https_keygen.sh ${D}${bindir}/
+  install -m 0644 ${UNPACKDIR}/openssl-cert.conf ${D}${sysconfdir}/lighttpd
+  install -m 0755 ${UNPACKDIR}/https_keygen.sh ${D}${bindir}/
 }
 
 inherit s6rc

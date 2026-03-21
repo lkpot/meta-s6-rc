@@ -8,14 +8,14 @@ Upstream-Status: Inappropriate [S6 specific]
  svr-main.c | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/svr-main.c b/svr-main.c
+diff --git a/src/svr-main.c b/src/svr-main.c
 index 9234361..3993b78 100644
---- a/svr-main.c
-+++ b/svr-main.c
+--- a/src/svr-main.c
++++ b/src/svr-main.c
 @@ -204,6 +204,13 @@ static void main_noinetd(int argc, char ** argv, const char* multipath) {
  		fclose(pidfile);
  	}
- 
+
 +	const char *notification = getenv("NOTIFICATION_FD");
 +	if (notification && *notification > '2' && *notification <= '9') {
 +		int fd = *notification - '0';
@@ -25,7 +25,6 @@ index 9234361..3993b78 100644
 +
  	/* incoming connection select loop */
  	for(;;) {
- 
--- 
-2.25.1
 
+--
+2.25.1
